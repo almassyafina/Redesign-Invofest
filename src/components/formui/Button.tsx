@@ -11,10 +11,10 @@ export const Button: React.FC<ButtonProps> = ({
     variant = "primary",
     isLoading = false,
 }) => {
-    const base = "px-4 py-2 rounded font-medium";
+    const base = "w-full px-4 py-2 rounded-md font-medium transition";
     const styles ={
-        primary:"bg-blue-600 text-white",
-        outline:"border border-blue-600 text-blue-600"
+        primary: "bg-red-700 text-white hover:bg-red-800",
+        outline: "border border-red-700 text-red-700"
     };
 
 return (
