@@ -1,9 +1,9 @@
 import './App.css'
-import Header from './components/Header';
-import Button from './components/ui/Button';
-import { Collapse } from "./components/ui/Collapse";
-import CardPembicara from './components/ui/CardPembicara';
-import { Card } from './components/ui/Card';
+import Header from '../components/Header';
+import Button from '../components/ui/Button';
+import { Collapse } from "../components/ui/Collapse";
+import CardPembicara from '../components/ui/CardPembicara';
+import { Card } from '../components/ui/Card';
 
 
 function App() {
@@ -139,7 +139,6 @@ return (
         <Button
         label="Info Selengkapnya"
         variant='primary'
-        className='mt-4'
         />
         </Card>
       ))}
