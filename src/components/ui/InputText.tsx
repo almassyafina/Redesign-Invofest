@@ -15,14 +15,26 @@ export const InputText: React.FC<InputTextProps> = ({
 }) => {
     return (
          <div className="flex flex-col gap-1 mb-4">
-                <label htmlFor="label">{label}</label>
+
+                <label htmlFor="label" className="text-sm font-medium text-slate-600">
+                    {label}
+                </label>
+
                 <input 
                 type="text" 
                 {...register(nama)}
                 placeholder={label} 
-                className="border p-2"
+                className="
+                w-full px-4 py-3 
+                rounded-lg 
+                border border-slate-300 
+                shadow-inner
+                focus:outline-none 
+                focus:ring-2 focus:ring-[#8B2F4A]
+                transition"
                 />
                 {error && <p className="text-red-500 text-sm">{error}</p>}
             </div>
+          
     );
 };

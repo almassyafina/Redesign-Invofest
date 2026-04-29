@@ -38,7 +38,7 @@ export default function RegisterForm() {
         className="bg-white p-3 rounded-lg shadow-md w-300px flex flex-col gap-2">
         
         <h2 className="text-xl font-bold text-center mb-2">
-         Registrasi Event</h2>
+         Selamat Datang!</h2>
 
             <Input
             label="Nama"
