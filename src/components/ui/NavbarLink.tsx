@@ -3,14 +3,12 @@ interface NavLinkProps {
     label: string;
     href: string;
     icon?: React.ReactNode;
-    isActive?: boolean;
 }
 
 export const NavbarLink: React.FC<NavLinkProps> = ({
     label,
     href,
     icon,
-    isActive = false,
 }) => {
     const activeStyle = "text-red-600";
     const defaultStyle = "text-slate-600 hover:text-red-900";
