@@ -1,3 +1,4 @@
+
 import Button from "../components/ui/Button";
 
 export default function Seminar () {
@@ -37,4 +38,4 @@ export default function Seminar () {
         
                 </div>
     );
-}
+
