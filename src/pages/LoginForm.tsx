@@ -3,10 +3,13 @@ import { useForm } from "react-hook-form";
 import { InputText } from "../components/ui/InputText";
 import { InputPassword } from "../components/ui/InputPassword";
 import { Button } from "../components/ui/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import {z} from "zod";
+import { useAuthStore } from "../store/useAuthStore";
+
+
 
 type FormData = {
     email: string;
@@ -20,6 +23,10 @@ const schema = z.object({
 
 
 export default function LoginForm() {
+    const navigate = useNavigate();
+    const login = useAuthStore((state) => state.login); 
+
+
     const {register, 
         handleSubmit,
         formState: {errors},
@@ -27,8 +34,18 @@ export default function LoginForm() {
         resolver: zodResolver(schema),
     });
 
-    const onSumbit = (data: FormData) => {
+    const onSubmit = (data: FormData) => {
         console.log(data);
+        if(data.email == "almassyarfina@gmail.com" && data.password == "24090092") {
+            alert("Login Berhasil");
+
+            login(data.email);
+
+            //Redirect ke HALAMAN DASHBOARD
+            navigate("/dashboard");
+        } else {
+            alert("Email atau password anda salah!");
+        }
     };
 
 
@@ -46,7 +63,7 @@ export default function LoginForm() {
             </p>
         </div>
 
-        <form onSubmit={handleSubmit(onSumbit)} className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
            <InputText
            label="Email"
            nama="email"

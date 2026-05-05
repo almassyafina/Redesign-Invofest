@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 
 
 export const Header: React.FC = () => {
-    const currentPath = "/";
 
     const menuItems = [
         { label: "Beranda", href: "/", icon: <Home size={18} />},
@@ -37,7 +36,7 @@ return (
                 ))}
                     <NavLink 
                     to={"/Login"}
-                    className={({isActive}) => `flex items-center gap-2 px-4 py-2 font medium transition-all duration-200 
+                    className={({isActive}) => `flex items-center gap-2 px-4 py-2 font-medium transition-all duration-200 
                     ${isActive ? activeStyle : defaultStyle}`}
                     >
                     <span className="w-5 h-5">

@@ -8,6 +8,15 @@ import LoginForm from "./pages/LoginForm";
 import MainLayout from "./layouts/MainLayout";
 import AuthLayout from "./layouts/AuthLayout";
 import Registerform from "./pages/Registerform"
+import DashboardIndex from "./pages/dashboard/DashboardIndex";
+import ProtectedRoute from "./routes/ProtectedRoute";
+import DashboardLayout from "./layouts/DashboardLayout";
+import CategoryIndex from "./pages/dashboard/category/CategoryIndex";
+import CategoryCreate from "./pages/dashboard/category/CategoryCreate";
+import PembicaraIndex from "./pages/dashboard/pembicara/PembicaraIndex";
+import EventIndex from "./pages/dashboard/event/EventIndex";
+import PembicaraCreate from "./pages/dashboard/pembicara/PembicaraCreate";
+import EventCreate from "./pages/dashboard/event/EventCreate";
 
 
 
@@ -15,7 +24,7 @@ import Registerform from "./pages/Registerform"
 function App() {
   return (
     <BrowserRouter>
-    <Routes>
+  <Routes>
       <Route element={<MainLayout/>}>
         <Route path="/" element={<Homepage/>}/>
         <Route path="/competition" element={<Competition/>}/>
@@ -27,10 +36,25 @@ function App() {
       <Route element={<AuthLayout/>}>
       <Route path="/Login" element={<LoginForm/>}/>
       <Route path="/Register" element={<Registerform/>}/>
-
-
       </Route>
-    </Routes>
+
+
+    {/* HALAMAN YANG HANYA BISA DIAKSES JIKA SUDAH LOGIN */}
+    <Route element={<ProtectedRoute/>}>
+      <Route element={<DashboardLayout/>}>
+      <Route path="/dashboard" element={<DashboardIndex/>} />
+
+      <Route path="/dashboard/category" element={<CategoryIndex />} />
+      <Route path="/dashboard/pembicara" element={<PembicaraIndex />} />
+      <Route path="/dashboard/event" element={<EventIndex />} />
+
+
+      <Route path="/dashboard/category/create" element={<CategoryCreate/>} />
+      <Route path="/dashboard/pembicara/create" element={<PembicaraCreate/>} />
+      <Route path="/dashboard/event/create" element={<EventCreate/>} />
+    </Route>
+    </Route>
+  </Routes>
     </BrowserRouter>
 
 
