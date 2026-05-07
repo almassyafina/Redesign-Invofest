@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { usePembicaraStore } from '../../../store/usePembicaraStore';
 
 export default function PembicaraCreate() {
   const [nama, setNama] = useState("");
@@ -7,19 +8,17 @@ export default function PembicaraCreate() {
   const [foto, setFoto] = useState("");
 
   const navigate = useNavigate();
+  const addPembicara = usePembicaraStore((state) => state.addPembicara);
 
-  const handleSimpan = (e: { preventDefault: () => void; }) => {
+  const handleSimpan = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const data = {
+    addPembicara({
       nama,
       role,
       foto
-    };
+    });
 
-    console.log("Menyimpan Pembicara:", data);
-
-    // setelah simpan, kembali ke halaman index
     navigate("/dashboard/pembicara");
   };
 
@@ -29,7 +28,6 @@ export default function PembicaraCreate() {
       
       <form onSubmit={handleSimpan} className="border-2 border-[#8B2F4A] p-6 rounded-md">
         
-        {/* Nama */}
         <div className="mb-4">
           <label className="block text-lg mb-2">Nama</label>
           <input
@@ -38,11 +36,9 @@ export default function PembicaraCreate() {
             onChange={(e) => setNama(e.target.value)}
             className="w-full border-2 border-[#8B2F4A] p-2 rounded"
             placeholder="Masukkan nama pembicara"
-            required
           />
         </div>
 
-        {/* Role */}
         <div className="mb-4">
           <label className="block text-lg mb-2">Role</label>
           <input
@@ -51,15 +47,14 @@ export default function PembicaraCreate() {
             onChange={(e) => setRole(e.target.value)}
             className="w-full border-2 border-[#8B2F4A] p-2 rounded"
             placeholder="Contoh: CEO, Developer, dll"
-            required
           />
         </div>
 
-        {/* Foto */}
         <div className="mb-6">
           <label className="block text-lg mb-2">Foto</label>
           <input
             type="text"
+            value={foto}
             onChange={(e) => setFoto(e.target.value)}
             className="w-full border-2 border-[#8B2F4A] p-2 rounded"
             placeholder='Masukan Link Foto'

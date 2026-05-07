@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCategoryStore } from '../../../store/useCategoryStore';
 
 export default function CategoryCreate() {
   const [nama, setNama] = useState("");
   const navigate = useNavigate();
+  const addCategory = useCategoryStore((state) => state.addCategory);
 
   const handleSimpan = (any: { preventDefault: () => void; }) => {
     any.preventDefault();
-    console.log("Menyimpan Kategori:", nama);
-    
-    navigate("/dashboard/category"); 
+     addCategory(nama);
+
+    navigate("/dashboard/category");
   };
 
   return (
@@ -39,4 +41,3 @@ export default function CategoryCreate() {
     </div>
   );
 };
-

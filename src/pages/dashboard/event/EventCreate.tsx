@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useEventStore } from '../../../store/UseEventStore';
 
 export default function EventCreate() {
   const [nama, setNama] = useState("");
@@ -8,20 +9,18 @@ export default function EventCreate() {
   const [jam, setJam] = useState("");
 
   const navigate = useNavigate();
+  const addEvent = useEventStore((state) => state.addEvent);
 
-  const handleSimpan = (e: { preventDefault: () => void; }) => {
+   const handleSimpan = (e: any) => {
     e.preventDefault();
 
-    const data = {
+    addEvent({
       nama,
       pembicara,
       tanggal,
       jam
-    };
+    });
 
-    console.log("Menyimpan Event:", data);
-
-    // setelah simpan, kembali ke halaman index
     navigate("/dashboard/event");
   };
 
