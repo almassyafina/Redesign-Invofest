@@ -13,13 +13,13 @@ const [location, setLocation] = useState("");
 const [dateEvent, setDateEvent] = useState("");
 const [description, setDescription] = useState("");
 const navigate = useNavigate();
-  const addEvent = useEventStore((state) => state.addEvent);
+  const addEvent = useEventStore((state : any) => state.addEvent);
 
   // ambil category & pembicara
-  const categories = useCategoryStore((state) => state.categories);
-  const pembicaras = usePembicaraStore((state) => state.pembicara);
-  const fetchCategories = useCategoryStore((state) => state.fetchCategories);
-  const fetchPembicara = usePembicaraStore((state) => state.fetchPembicara);
+  const categories = useCategoryStore((state : any) => state.categories);
+  const pembicaras = usePembicaraStore((state : any) => state.pembicara);
+  const fetchCategories = useCategoryStore((state : any) => state.fetchCategories);
+  const fetchPembicara = usePembicaraStore((state : any) => state.fetchPembicara);
 
   useEffect(() => {
     // Panggil fungsi fetch jika datanya ada
@@ -84,7 +84,7 @@ const navigate = useNavigate();
             <option >
               Pilih Category
             </option>
-            {categories?.map((item) => (
+            {categories?.map((item: any) => (
             <option key={item.id} value={item.id}>
               {item.name}
             </option>
@@ -105,7 +105,7 @@ const navigate = useNavigate();
             <option>
               Pilih Pembicara
             </option>
-            {pembicaras?.map((item) => (
+            {pembicaras?.map((item : any) => (
             <option key={item.id} value={item.id}> {item.name}
             </option>
             ))}  
