@@ -3,21 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import { usePembicaraStore } from '../../../store/usePembicaraStore';
 
 export default function PembicaraCreate() {
-  const [nama, setNama] = useState("");
+  const [name, setNama] = useState("");
   const [role, setRole] = useState("");
-  const [foto, setFoto] = useState("");
+  const [image, setFoto] = useState("");
 
   const navigate = useNavigate();
   const addPembicara = usePembicaraStore((state) => state.addPembicara);
 
-  const handleSimpan = (e: React.FormEvent) => {
+    const handleSimpan = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    addPembicara({
-      nama,
-      role,
-      foto
-    });
+    
+    // Jangan lupa pakai await
+    await addPembicara({ name, role, image });
 
     navigate("/dashboard/pembicara");
   };
@@ -32,7 +29,7 @@ export default function PembicaraCreate() {
           <label className="block text-lg mb-2">Nama</label>
           <input
             type="text"
-            value={nama}
+            value={name}
             onChange={(e) => setNama(e.target.value)}
             className="w-full border-2 border-[#8B2F4A] p-2 rounded"
             placeholder="Masukkan nama pembicara"
@@ -54,7 +51,7 @@ export default function PembicaraCreate() {
           <label className="block text-lg mb-2">Foto</label>
           <input
             type="text"
-            value={foto}
+            value={image}
             onChange={(e) => setFoto(e.target.value)}
             className="w-full border-2 border-[#8B2F4A] p-2 rounded"
             placeholder='Masukan Link Foto'
@@ -63,7 +60,7 @@ export default function PembicaraCreate() {
 
         <button
           type="submit"
-          className="border-2 bg-green-300 border-[#8B2F4A] px-6 py-2 hover:bg-green-800 rounded-3xl font-bold"
+          className="border-2 bg-[#8B2F4A] text-white border-white px-6 py-2 hover:bg-[#571227] rounded-3xl font-bold"
         >
           Simpan
         </button>

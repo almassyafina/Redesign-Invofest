@@ -12,12 +12,12 @@ import { useAuthStore } from "../store/useAuthStore";
 
 
 type FormData = {
-    email: string;
+    nim : string;
     password: string;
 };
 
 const schema = z.object({
-    email: z.string().min(1, "Email harus diisi"),
+    nim: z.string().min(1, "Nim harus diisi"),
     password: z.string().min(8, "Password Minimal 8 Karakter")
 });
 
@@ -33,17 +33,17 @@ export default function LoginForm() {
     } = useForm<FormData>({
         resolver: zodResolver(schema),
         defaultValues: {
-            email: "almassyarfina@gmail.com",
-            password: "24090092"
+            nim : "24090092",
+            password: "12345678"
         }
     });
 
     const onSubmit = (data: FormData) => {
         console.log(data);
-        if(data.email == "almassyarfina@gmail.com" && data.password == "24090092") {
+        if(data.nim == "24090092" && data.password == "12345678") {
             alert("Login Berhasil");
 
-            login(data.email);
+            login(data.nim);
 
             //Redirect ke HALAMAN DASHBOARD
             navigate("/dashboard");
@@ -69,10 +69,10 @@ export default function LoginForm() {
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
            <InputText
-           label="Email"
-           nama="email"
+           label="NIM"
+           nama="Nim"
            register={register}
-           error={errors.email?.message}
+           error={errors.nim?.message}
            />
 
             <InputPassword

@@ -3,13 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import { useCategoryStore } from '../../../store/useCategoryStore';
 
 export default function CategoryCreate() {
-  const [nama, setNama] = useState("");
+  const [name, setNama] = useState("");
   const navigate = useNavigate();
   const addCategory = useCategoryStore((state) => state.addCategory);
 
-  const handleSimpan = (any: { preventDefault: () => void; }) => {
+  // 1. Tambahkan 'async' di sini
+  const handleSimpan = async (any: { preventDefault: () => void; }) => {
     any.preventDefault();
-     addCategory(nama);
+    
+    // 2. Tambahkan 'await' di sini
+    await addCategory(name);
 
     navigate("/dashboard/category");
   };
@@ -23,7 +26,7 @@ export default function CategoryCreate() {
           <label className="block text-xl mb-2">Nama</label>
           <input
             type="text"
-            value={nama}
+            value={name}
             onChange={(e) => setNama(e.target.value)}
             className="w-full border-2 border-[#8B2F4A] p-2 rounded"
             placeholder="Masukkan nama kategori..."
@@ -33,7 +36,7 @@ export default function CategoryCreate() {
 
         <button
           type="submit"
-          className="border-2 bg-green-300 border-[#8B2F4A] px-6 py-2 hover:bg-green-800 rounded-3xl font-bold"
+          className="border-2 bg-[#8B2F4A] text-white border-white px-6 py-2 hover:bg-[#571227] rounded-3xl font-bold"
         >
           Simpan
         </button>

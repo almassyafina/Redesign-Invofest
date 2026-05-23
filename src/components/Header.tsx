@@ -26,6 +26,7 @@ return (
             <div className="nav flex gap-2">
                 {menuItems.map((item) => (
                     <NavLink 
+                    key={item.label}
                     to={item.href}
                     className={({isActive}) => `flex items-center gap-2 px-4 py-2 font medium transition-all duration-200 
                     ${isActive ? activeStyle : defaultStyle}`}
