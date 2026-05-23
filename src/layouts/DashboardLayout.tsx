@@ -6,19 +6,20 @@ import { useEventStore } from "../store/useEventStore";
 import { usePembicaraStore } from "../store/usePembicaraStore";
 
 export default function DashboardLayout() {
-  const logout = useAuthStore((state) => state.logout);
+  // Tambahkan ": any" untuk menghilangkan error TS7006
+  const logout = useAuthStore((state: any) => state.logout);
   const navigate = useNavigate();
 
-  // Mengambil fungsi fetch dari masing-masing store
-  const fetchCategories = useCategoryStore((state) => state.fetchCategories);
-  const fetchEvents = useEventStore((state) => state.fetchEvents);
-  const fetchPembicara = usePembicaraStore((state) => state.fetchPembicara);
+  // Tambahkan ": any" agar TypeScript tidak komplain
+  const fetchCategories = useCategoryStore((state: any) => state.fetchCategories);
+  const fetchEvents = useEventStore((state: any) => state.fetchEvents);
+  const fetchPembicara = usePembicaraStore((state: any) => state.fetchPembicara);
 
-  // useEffect untuk memastikan data selalu ter-fetch saat dashboard diakses
   useEffect(() => {
-    fetchCategories();
-    fetchEvents();
-    fetchPembicara();
+    // Pastikan fungsi dipanggil dengan aman
+    if (fetchCategories) fetchCategories();
+    if (fetchEvents) fetchEvents();
+    if (fetchPembicara) fetchPembicara();
   }, [fetchCategories, fetchEvents, fetchPembicara]);
 
   const handleLogout = () => {
@@ -75,7 +76,6 @@ export default function DashboardLayout() {
 
       {/* KONTEN (KANAN) */}
       <div className="flex-1 p-8 overflow-auto">
-        {/* Outlet akan merender halaman anak seperti EventIndex, CategoryIndex, dll */}
         <Outlet />
       </div>
     </div>
