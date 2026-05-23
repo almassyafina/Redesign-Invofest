@@ -5,6 +5,7 @@ import { useEventStore } from "../../../store/useEventStore";
 import { useCategoryStore } from "../../../store/useCategoryStore";
 import { usePembicaraStore } from "../../../store/usePembicaraStore";
 
+
 export default function EventUpdate() {
 
   const { id } = useParams();
@@ -19,11 +20,11 @@ export default function EventUpdate() {
 
   // STATE
   const [name, setName] = useState("");
-  const [categoryId, setCategoryId] = useState<number>(0);
-  const [pembicaraId, setPembicaraId] = useState<number>(0);
+  const [category_id, setCategoryId] = useState<number>(0);
+  const [pembicara_id, setPembicaraId] = useState<number>(0);
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
-  const [dateEvent, setdateEvent] = useState("");
+  const [date_event, setdateEvent] = useState("");
  
 
 
@@ -37,11 +38,13 @@ export default function EventUpdate() {
     if (event) {
 
       setName(event.name);
-      setCategoryId(event.categoryId);
-      setPembicaraId(event.pembicaraId);
+      setCategoryId(event.category_id);
+      setPembicaraId(event.pembicara_id);
       setLocation(event.location);
       setDescription(event.description);
-      setdateEvent(event.dateEvent);
+      setdateEvent( event.date_event instanceof Date 
+    ? event.date_event.toISOString().split('T')[0] 
+    : String(event.date_event).split('T')[0] );
 
 
 
@@ -58,10 +61,10 @@ export default function EventUpdate() {
 
     updateEvent(Number(id), {
     name,
-    categoryId: Number(categoryId),
-    pembicaraId: Number(pembicaraId),
+    category_id: Number(category_id),
+    pembicara_id: Number(pembicara_id),
     location,
-    dateEvent,
+    date_event: date_event ? new Date(date_event) : new Date(),
     description,
     });
 
@@ -108,7 +111,7 @@ export default function EventUpdate() {
           </label>
 
           <select
-            value={categoryId}
+            value={category_id}
             onChange={(e) =>
               setCategoryId(
                 Number(e.target.value)
@@ -143,7 +146,7 @@ export default function EventUpdate() {
           </label>
 
           <select
-            value={pembicaraId}
+            value={pembicara_id}
             onChange={(e) =>
               setPembicaraId(
                 Number(e.target.value)
@@ -179,7 +182,7 @@ export default function EventUpdate() {
 
           <input
             type="date"
-            value={dateEvent}
+            value={date_event}
             onChange={(e) =>
               setdateEvent(e.target.value)
             }

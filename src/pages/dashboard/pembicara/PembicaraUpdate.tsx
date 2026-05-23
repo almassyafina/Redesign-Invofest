@@ -16,9 +16,9 @@ export default function PembicaraUpdate() {
     (state) => state.updatePembicara
   );
 
-  const [nama, setNama] = useState("");
+  const [name, setName] = useState("");
   const [role, setRole] = useState("");
-  const [foto, setFoto] = useState("");
+  const [image, setImage] = useState("");
 
   // ambil data berdasarkan id
   useEffect(() => {
@@ -28,9 +28,9 @@ export default function PembicaraUpdate() {
     );
 
     if (dataPembicara) {
-      setNama(dataPembicara.nama);
+      setName(dataPembicara.name);
       setRole(dataPembicara.role);
-      setFoto(dataPembicara.foto);
+      setImage(dataPembicara.image);
     }
 
   }, [id, pembicara]);
@@ -43,9 +43,9 @@ export default function PembicaraUpdate() {
     e.preventDefault();
 
     updatePembicara(Number(id), {
-      nama,
+      name,
       role,
-      foto,
+      image,
     });
 
     navigate("/dashboard/pembicara");
@@ -72,9 +72,9 @@ export default function PembicaraUpdate() {
 
           <input
             type="text"
-            value={nama}
+            value={name}
             onChange={(e) =>
-              setNama(e.target.value)
+              setName(e.target.value)
             }
             className="w-full border-2 border-[#8B2F4A] p-2 rounded"
           />
@@ -104,9 +104,9 @@ export default function PembicaraUpdate() {
 
           <input
             type="text"
-            value={foto}
+            value={image}
             onChange={(e) =>
-              setFoto(e.target.value)
+              setImage(e.target.value)
             }
             className="w-full border-2 border-[#8B2F4A] p-2 rounded"
           />
