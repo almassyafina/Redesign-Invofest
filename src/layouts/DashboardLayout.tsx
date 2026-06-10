@@ -4,6 +4,7 @@ import { useAuthStore } from "../store/useAuthStore";
 import { useCategoryStore } from "../store/useCategoryStore";
 import { useEventStore } from "../store/useEventStore";
 import { usePembicaraStore } from "../store/usePembicaraStore";
+import { useUserStore } from "../store/useUserStore";
 
 export default function DashboardLayout() {
   // Tambahkan ": any" untuk menghilangkan error TS7006
@@ -14,13 +15,15 @@ export default function DashboardLayout() {
   const fetchCategories = useCategoryStore((state: any) => state.fetchCategories);
   const fetchEvents = useEventStore((state: any) => state.fetchEvents);
   const fetchPembicara = usePembicaraStore((state: any) => state.fetchPembicara);
+  const fetchUser = useAuthStore((state: any) => state.fetchUser);
 
   useEffect(() => {
     // Pastikan fungsi dipanggil dengan aman
     if (fetchCategories) fetchCategories();
     if (fetchEvents) fetchEvents();
     if (fetchPembicara) fetchPembicara();
-  }, [fetchCategories, fetchEvents, fetchPembicara]);
+    if (fetchUser) fetchUser();
+  }, [fetchCategories, fetchEvents, fetchPembicara, fetchUser]);
 
   const handleLogout = () => {
     logout();
@@ -45,10 +48,12 @@ export default function DashboardLayout() {
           <ul className="flex flex-col gap-4 w-full text-center">
             {[
               { path: "/dashboard", label: "DASHBOARD" },
+              { path: "/dashboard/user", label: "USER" },
               { path: "/dashboard/category", label: "CATEGORY" },
               { path: "/dashboard/pembicara", label: "PEMBICARA" },
               { path: "/dashboard/event", label: "EVENT" },
-              { path: "/dashboard/Biodata", label: "BIODATA" },
+              { path: "/dashboard/biodata", label: "BIODATA" },
+              
             ].map((menu) => (
               <li
                 key={menu.path}

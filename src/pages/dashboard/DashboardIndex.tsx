@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom"; 
-import { CalendarDays, LayoutGrid, Mic2 } from "lucide-react";
+import { CalendarDays, LayoutGrid, Mic2, UserRound,  } from "lucide-react";
 import { useCategoryStore } from "../../store/useCategoryStore";
 import { useEventStore } from "../../store/useEventStore"; 
 import { usePembicaraStore } from "../../store/usePembicaraStore";
+import { useUserStore } from "../../store/useUserStore";
 
 // Komponen StatCard (Tetap sama)
 interface StatCardProps {
@@ -33,6 +34,7 @@ export default function DashboardIndex() {
   const { categories } = useCategoryStore();
   const { events } = useEventStore();
   const { pembicara } = usePembicaraStore();
+  const { user } = useUserStore();
 
   return (
     <div className="p-8">
@@ -45,6 +47,7 @@ export default function DashboardIndex() {
         <StatCard title="Category" value={Array.isArray(categories) ? categories.length : 0} color="cyan" Icon={LayoutGrid} desc="Total kategori" />
         <StatCard title="Event" value={Array.isArray(events) ? events.length : 0} color="green" Icon={CalendarDays} desc="Total event" />
         <StatCard title="Pembicara" value={Array.isArray(pembicara) ? pembicara.length : 0} color="orange" Icon={Mic2} desc="Total pembicara" />
+        <StatCard title="User" value={Array.isArray(user) ? user.length : 0} color="cyan" Icon={UserRound} desc="Total user" />
       </div>
 
       {/* DATA TABLES GRID */}
@@ -98,6 +101,22 @@ export default function DashboardIndex() {
           </table>
         </div>
 
+
+        {/* TABEL USER */}
+        <div className="bg-[#F5F5DC] backdrop-blur-md border border-gray-200 shadow-sm rounded-2xl p-6">
+          <h2 className="text-lg font-semibold mb-4 text-gray-700">Data User</h2>
+          <table className="w-full text-sm text-left">
+            <tbody>
+              {Array.isArray(user) && user.length > 0 ? user.map((item, index) => (
+                <Link key={item.id} to={`/dashboard/user`} style={{ display: 'contents' }}>
+                  <tr className="border-b hover:bg-gray-50 cursor-pointer transition-colors">
+                    <td className="py-3 font-medium">{index + 1}</td><td>{item.name}</td>
+                  </tr>
+                </Link>
+              )) : <tr><td className="py-3 text-gray-400">Belum ada user</td></tr>}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
