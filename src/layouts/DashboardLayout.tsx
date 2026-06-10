@@ -15,7 +15,8 @@ export default function DashboardLayout() {
   const fetchCategories = useCategoryStore((state: any) => state.fetchCategories);
   const fetchEvents = useEventStore((state: any) => state.fetchEvents);
   const fetchPembicara = usePembicaraStore((state: any) => state.fetchPembicara);
-  const fetchUser = useAuthStore((state: any) => state.fetchUser);
+  const fetchUser = useUserStore((state: any) => state.fetchUser);
+  
 
   useEffect(() => {
     // Pastikan fungsi dipanggil dengan aman
