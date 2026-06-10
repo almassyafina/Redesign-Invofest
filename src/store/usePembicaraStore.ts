@@ -16,7 +16,7 @@ interface PembicaraState {
 }
 
 // URL Backend API Express untuk Pembicara
-const API_URL = "https://backenduts-mysql-7092.up.railway.app/pembicara";
+const API_URL = "https://backenduts-production-7092.up.railway.app/events";
 
 export const usePembicaraStore = create<PembicaraState>()((set) => ({
   pembicara: [],
